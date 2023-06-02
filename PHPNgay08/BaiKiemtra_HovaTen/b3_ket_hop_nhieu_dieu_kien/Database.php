@@ -22,14 +22,13 @@ function getListBooks($keyword="", $year="")
     if($conn==NULL)
         return -1;//Lỗi kết nối CSDL
     $sql = "SELECT * FROM tbbooks WHERE TRUE ";
-    
     if($keyword!="")
         $sql .= " AND title LIKE '%$keyword%'";
-    if($year!="") 
+    if($year!="")
     {
-        $sql .= " AND pub_year= $year";   
+        $sql .= " AND pub_year= $year";
     }
-        
+
     echo "<p>$sql</p>";
     $pdo_stm = $conn->prepare($sql);
     $ketqua = $pdo_stm->execute();//trả về TRUE/FALSE
@@ -38,6 +37,5 @@ function getListBooks($keyword="", $year="")
     else{
         $rows = $pdo_stm->fetchAll();
         return $rows;
-    }    
+    }
 }
-?>
