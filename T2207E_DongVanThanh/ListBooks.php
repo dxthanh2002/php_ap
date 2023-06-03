@@ -19,8 +19,6 @@
         <form name="f1" id="f1" method="get" action="">
             Title:<input type="text" name="keyword" id="keyword" 
                 placeholder="books name" value="<?=$keyword?>">
-            Year:<input type="text" name="year" id="year"
-                placeholder="pub year" value="<?=$year?>" size="5"> 
             <input type="submit" name="b1" id="b1" value="Search">
         </form>
     </div>

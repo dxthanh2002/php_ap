@@ -5,25 +5,24 @@ function ConnectDB()
     try
     {
     $conn = new PDO("mysql:host=localhost;dbname=phpdemo08_1","root","");
-    $conn->query("SET NAMES UTF8");//thiết lập chế độ unicode
+    $conn->query("SET NAMES UTF8");
     }
     catch(PDOException $ex)
     {
-        echo "<p>" . $ex->getMessage() . "</p>";//thông báo lỗi hệ thống
+        echo "<p>" . $ex->getMessage() . "</p>";
     }
-    return $conn;//trả về đối tượng PDO
+    return $conn;
 }
 function getListBooks($keyword="",$year=""){
     $conn = ConnectDB();
     if ($conn==NULL){
-        return -1;// loi ket noi csdl
+        return -1;
     }
     $sql = "SELECT * from tbbooks where true";
     if($keyword!="")
         $sql .= " AND title LIKE '%$keyword%'";
     if($year!="")
         $sql .= " AND pub_year= $year";
-        echo "<p>$sql</p>";
     $pdo_stm = $conn->prepare($sql);
     $ketqua = $pdo_stm->execute();
     if($ketqua == FALSE){
