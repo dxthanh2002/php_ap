@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm sử dụng AJAX và JQuery</title>
+    <script src="jquery.min.js"></script>
+    <script>
+    function timkiemAJAX()
+    {
+        tukhoa = $("#tukhoa").val(); //lấy giá trị của input có id=tukhoa
+        namxb = $("#namxb").val(); //lấy giá trị của input có id=namxb
+        if(isNaN(namxb))
+            namxb = "";
+        
+        //$("#ketqua").html("Đang tìm kiếm...");
+        $("#ketqua").html("<div style='text-align:center'><img src='loading.gif' width='80'></div>");
+        //xử dụng AJAX bằng JQuery để gửi request tới trang ListBook.php và hiển thị kết quả
+        $.post(
+            "ListBooks.php",
+            {keyword:tukhoa,year:namxb},
+            function(responseData, status){
+                if(status=="success")
+                    $("#ketqua").html(responseData);
+                else
+                $("#ketqua").html("<h3>Lỗi gửi request</h3>");
+            }
+        );
+    }
+    //$(document).ready(function(){...} ); để đảm bảo các lệnh chỉ thực hiện khi nội dung web đã tải xong   
+    $(document).ready(function () {
+        $("#tukhoa").keyup(timkiemAJAX);
+        $("#namxb").keyup(timkiemAJAX);
+    });  
+    </script>
+</head>
+<body>
+    <div style="width:800px;  margin:5px auto">
+        Tìm kiếm sách: 
+        Tên sách: <input type="text" id="tukhoa">
+        Năm XB: <input type="text" id="namxb">
+    </div>
+    <div id="ketqua" style="width:800px; border:1px red solid; margin:5px auto;">
+        Kết quả
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ví dụ JSON</title>
+    <script>
+        function show(){
+             //tạo đối tượng xmlhttp (AJAX) để đọc dữ liệu từ Server
+             const xmlhttp = new XMLHttpRequest();
+             xmlhttp.onload = function() {
+                 var book = JSON.parse(this.responseText);
+                 //hiển thị thông tin đối tượng
+                 var content = "";
+                 content += ("ISBN: <b>" + book.isbn + "</b>");
+                 content +=("<br>");
+                 content +=("Title: " + book.title);
+                 content +=("<br>");
+                 content +=("Category: " + book.category);
+                 content +=("<br>");
+                 content +=("Author: " + book.author);
+                 content +=("<br>");
+                 content +=("Page: " + book.page);
+                 content +=("<br>");
+                 content +=("Price: " + book.price);   
+                 document.getElementById("demo").innerHTML=content;
+             };
+             xmlhttp.open("GET", "data/" + document.getElementById("t1").value);
+             xmlhttp.send();
+                      
+        }
+    </script>
+</head>
+<body>
+    <h2>Phân tích chuỗi JSON từ file JSON trên Server</h2>
+    <div>
+        <input type="text" name="t1" id="t1" value="book.json">
+        <input type="button" name="b1" id="b1" value="Hiển thị" onclick="show()">
+    </div>
+   <div id="demo"></div>
+</body>
+</html>
